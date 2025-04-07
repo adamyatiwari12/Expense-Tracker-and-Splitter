@@ -33,17 +33,21 @@ export default function ExpenseTracker() {
     setEditingIndex(null);
   };
 
+  const clearAll = () => {
+    setExpenses([])
+  }
+
   const total = expenses.reduce((acc, item) => acc + Number(item.amount), 0);
 
   return (
     <div className="flex flex-col">
-      <div className="bg-white p-4 rounded-lg shadow-md">
-        <h2 className="font-semibold text-lg mb-4">Expense Tracker 📊</h2>
+      <div className="bg-white p-5 rounded-xl shadow-lg">
+        <h2 className="font-bold text-xl mb-4 text-blue-600">Expense Tracker</h2>
         <div className="flex gap-2">
           <input
             type="text"
             placeholder="Expense Title"
-            className="border p-2 w-full rounded-md"
+            className="border border-slate-300 bg-slate-100 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -51,11 +55,11 @@ export default function ExpenseTracker() {
             type="number"
             placeholder="Amount"
             value={amount}
-            className="border p-2 w-20 rounded-md"
+            className="border border-slate-300 bg-slate-100 p-2 w-24 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             onChange={(e) => setAmount(e.target.value)}
           />
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
             onClick={addExpense}
           >
             +
@@ -66,13 +70,13 @@ export default function ExpenseTracker() {
       <div className="bg-white mt-2 flex-1 shadow-md rounded-lg p-4 overflow-y-auto">
         {expenses.length === 0 ? (
           <div className="h-full flex items-center justify-center">
-            <h2 className="text-center text-4xl">No Expenses Yet</h2>
+            <h2 className="text-center text-2xl text-slate-500">No Expenses Yet</h2>
           </div>
         ) : (
           <div className="h-full">
-            <table className="w-full">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-200 text-gray-700 text-left">
+                <tr className="bg-slate-200 text-slate-700 text-left">
                   <th className="px-4 py-2">#</th>
                   <th className="px-4 py-2">Title</th>
                   <th className="px-4 py-2">Date</th>
@@ -81,7 +85,7 @@ export default function ExpenseTracker() {
               </thead>
               <tbody>
                 {expenses.map((elem, i) => (
-                  <tr key={i} className="hover:bg-gray-50 border-b text-left">
+                  <tr key={i} className="hover:bg-slate-50 border-b text-left">
                     <td className="px-4 py-2">{i + 1}</td>
                     <td className="px-4 py-2">
                       {editingIndex === i ? (
@@ -106,7 +110,7 @@ export default function ExpenseTracker() {
                             className="border rounded px-2 py-1 text-sm w-20"
                           />
                         ) : (
-                          <span className="text-green-600 font-semibold">
+                          <span className="text-green-600 font-semibold text-sm">
                             ₹{elem.amount}
                           </span>
                         )}
@@ -115,13 +119,13 @@ export default function ExpenseTracker() {
                             <>
                               <button
                                 onClick={() => handleSaveEdit(i)}
-                                className="text-green-600 text-xs p-0"
+                                className="text-green-600 text-xs"
                               >
                                 ✅
                               </button>
                               <button
                                 onClick={() => setEditingIndex(null)}
-                                className="text-gray-500 text-xs p-0"
+                                className="text-gray-500 text-xs"
                               >
                                 ❌
                               </button>
@@ -134,13 +138,13 @@ export default function ExpenseTracker() {
                                   setEditedTitle(elem.title);
                                   setEditedAmount(elem.amount);
                                 }}
-                                className="text-blue-500 text-xs p-0"
+                                className="text-blue-500 text-xs"
                               >
                                 ✏️
                               </button>
                               <button
                                 onClick={() => removeExpense(i)}
-                                className="text-red-500 text-xs p-0"
+                                className="text-red-500 text-xs"
                               >
                                 🗑️
                               </button>
@@ -153,10 +157,13 @@ export default function ExpenseTracker() {
                 ))}
               </tbody>
             </table>
-
-            <p className="text-right font-semibold text-lg mt-4">
+            
+            <div className="flex justify-between">
+            <button className="text-white mt-3 p-0 text-xs" onClick={clearAll}>Clear All</button>
+            <p className="text-right font-semibold text-xl mt-4 text-slate-800">
               Total: ₹{total}
             </p>
+            </div>
           </div>
         )}
       </div>
