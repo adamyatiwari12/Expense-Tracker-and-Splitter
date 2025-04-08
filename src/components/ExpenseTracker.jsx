@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PrewrittenExpense from "./PrewrittenExpense";
 
 export default function ExpenseTracker() {
   const [expenses, setExpenses] = useState([]);
@@ -40,14 +41,15 @@ export default function ExpenseTracker() {
   const total = expenses.reduce((acc, item) => acc + Number(item.amount), 0);
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-white p-5 rounded-xl shadow-lg">
-        <h2 className="font-bold text-xl mb-4 text-blue-600">Expense Tracker</h2>
+    <div className="flex flex-col w-full h-full" style={{ backgroundColor: "#eaf4f8" }}>
+      <div className="p-5 rounded-xl shadow-lg" style={{ backgroundColor: "#ffffff" }}>
+        <h2 className="font-bold text-xl mb-4" style={{ color: "#014b73" }}>Expense Tracker</h2>
         <div className="flex gap-2">
           <input
             type="text"
             placeholder="Expense Title"
-            className="border border-slate-300 bg-slate-100 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 w-full rounded-md focus:outline-none"
+            style={{ borderColor: "#d0e3ec", backgroundColor: "#eaf4f8", borderWidth: "1px", borderStyle: "solid" }}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -55,11 +57,13 @@ export default function ExpenseTracker() {
             type="number"
             placeholder="Amount"
             value={amount}
-            className="border border-slate-300 bg-slate-100 p-2 w-24 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 w-24 rounded-md focus:outline-none"
+            style={{ borderColor: "#d0e3ec", backgroundColor: "#eaf4f8", borderWidth: "1px", borderStyle: "solid" }}
             onChange={(e) => setAmount(e.target.value)}
           />
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+            className="text-white px-4 py-2 rounded-md hover:opacity-90 transition"
+            style={{ backgroundColor: "#014b73" }}
             onClick={addExpense}
           >
             +
@@ -67,16 +71,14 @@ export default function ExpenseTracker() {
         </div>
       </div>
 
-      <div className="bg-white mt-2 flex-1 shadow-md rounded-lg p-4 overflow-y-auto">
+      <div className="mt-2 flex-1 shadow-md rounded-lg p-4 overflow-y-auto" style={{ backgroundColor: "#ffffff" }}>
         {expenses.length === 0 ? (
-          <div className="h-full flex items-center justify-center">
-            <h2 className="text-center text-2xl text-slate-500">No Expenses Yet</h2>
-          </div>
+          <PrewrittenExpense/>
         ) : (
           <div className="h-full">
-            <table className="w-full text-sm">
+            <table className="w-full text-xs">
               <thead>
-                <tr className="bg-slate-200 text-slate-700 text-left">
+                <tr className="text-left text-sm" style={{ backgroundColor: "#eaf4f8", color: "#032541" }}>
                   <th className="px-4 py-2">#</th>
                   <th className="px-4 py-2">Title</th>
                   <th className="px-4 py-2">Date</th>
@@ -85,15 +87,16 @@ export default function ExpenseTracker() {
               </thead>
               <tbody>
                 {expenses.map((elem, i) => (
-                  <tr key={i} className="hover:bg-slate-50 border-b text-left">
+                  <tr key={i} className="hover:bg-slate-50 border-b text-left" style={{ borderColor: "#d0e3ec", color: "#032541" }}>
                     <td className="px-4 py-2">{i + 1}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 text-sm">
                       {editingIndex === i ? (
                         <input
                           type="text"
                           value={editedTitle}
                           onChange={(e) => setEditedTitle(e.target.value)}
-                          className="border rounded px-2 py-1 text-sm"
+                          className="rounded px-2 py-1 text-sm"
+                          style={{ borderColor: "#bde6f9", borderWidth: "1px", borderStyle: "solid" }}
                         />
                       ) : (
                         elem.title
@@ -107,10 +110,11 @@ export default function ExpenseTracker() {
                             type="number"
                             value={editedAmount}
                             onChange={(e) => setEditedAmount(e.target.value)}
-                            className="border rounded px-2 py-1 text-sm w-20"
+                            className="rounded px-2 py-1 text-sm w-20"
+                            style={{ borderColor: "#bde6f9", borderWidth: "1px", borderStyle: "solid" }}
                           />
                         ) : (
-                          <span className="text-green-600 font-semibold text-sm">
+                          <span className="font-semibold text-sm" style={{ color: "#014b73" }}>
                             ₹{elem.amount}
                           </span>
                         )}
@@ -119,13 +123,15 @@ export default function ExpenseTracker() {
                             <>
                               <button
                                 onClick={() => handleSaveEdit(i)}
-                                className="text-green-600 text-xs"
+                                className="text-xs"
+                                style={{ backgroundColor: "#eaf4f8" }}
                               >
                                 ✅
                               </button>
                               <button
                                 onClick={() => setEditingIndex(null)}
-                                className="text-gray-500 text-xs"
+                                className="text-xs"
+                                style={{ backgroundColor: "#eaf4f8" }}
                               >
                                 ❌
                               </button>
@@ -138,13 +144,15 @@ export default function ExpenseTracker() {
                                   setEditedTitle(elem.title);
                                   setEditedAmount(elem.amount);
                                 }}
-                                className="text-blue-500 text-xs"
+                                className="text-xs"
+                                style={{ backgroundColor: "#eaf4f8" }}
                               >
                                 ✏️
                               </button>
                               <button
                                 onClick={() => removeExpense(i)}
-                                className="text-red-500 text-xs"
+                                className="text-xs"
+                                style={{ backgroundColor: "#eaf4f8" }}
                               >
                                 🗑️
                               </button>
@@ -159,10 +167,10 @@ export default function ExpenseTracker() {
             </table>
             
             <div className="flex justify-between">
-            <button className="text-white mt-3 p-0 text-xs" onClick={clearAll}>Clear All</button>
-            <p className="text-right font-semibold text-xl mt-4 text-slate-800">
-              Total: ₹{total}
-            </p>
+              <button className="mt-3 p-0 text-xs" onClick={clearAll} style={{ color: "#ffff", backgroundColor: "#014b73"}}>Clear All</button>
+              <p className="text-right font-semibold text-xl mt-4" style={{ color: "#032541" }}>
+                Total: ₹{total}
+              </p>
             </div>
           </div>
         )}
