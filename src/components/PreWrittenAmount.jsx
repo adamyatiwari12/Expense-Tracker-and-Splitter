@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function PreWrittenAmount() {
-  // Initial prewritten people and their split amounts
   const initialSplits = [
     {
       id: 1,
@@ -78,6 +77,9 @@ export default function PreWrittenAmount() {
         <p className="text-right font-semibold text-xl mt-4" style={{ color: "#032541" }}>
           Total: ₹{total.toFixed(2)}
         </p>
+      </div>
+      <div className="flex justify-center items-center h-[10em] opacity-40">
+      <p className="text-2xl">Split your own expenses</p>
       </div>
     </div>
   );

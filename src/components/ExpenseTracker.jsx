@@ -41,7 +41,7 @@ export default function ExpenseTracker() {
   const total = expenses.reduce((acc, item) => acc + Number(item.amount), 0);
 
   return (
-    <div className="flex flex-col w-full h-full" style={{ backgroundColor: "#eaf4f8" }}>
+    <div className="flex flex-col h-full" style={{ backgroundColor: "#eaf4f8" }}>
       <div className="p-5 rounded-xl shadow-lg" style={{ backgroundColor: "#ffffff" }}>
         <h2 className="font-bold text-xl mb-4" style={{ color: "#014b73" }}>Expense Tracker</h2>
         <div className="flex gap-2">

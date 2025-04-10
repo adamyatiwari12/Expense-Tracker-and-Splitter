@@ -14,7 +14,7 @@ export default function PrewrittenExpense() {
 
   return (
     <div className="flex flex-col w-full h-full" >
-      <div className="mt-2 flex-1 shadow-md rounded-lg p-4 overflow-y-auto" style={{ backgroundColor: "#ffffff", opacity: "0.4" }}>
+      <div className="mt-2 flex-1 rounded-lg p-4 overflow-y-auto" style={{ backgroundColor: "#ffffff", opacity: "0.4" }}>
         <div className="h-full">
           <table className="w-full text-sm">
             <thead>
@@ -59,6 +59,9 @@ export default function PrewrittenExpense() {
               Total: ₹{total}
             </p>
           </div>
+          <div className="flex justify-center items-center h-[10rem]">
+        <p className="text-2xl">Add your expenses</p>
+      </div>
         </div>
       </div>
     </div>

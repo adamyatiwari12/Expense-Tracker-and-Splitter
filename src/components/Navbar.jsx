@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="text-white px-4 py-3 h-[10%] shadow-xl" style={{ backgroundColor: "#014b73" }}>
-      <h1 className="text-xl sm:text-2xl font-bold text-center tracking-wide">
+    <nav className="bg-[#014b73] text-white px-4 h-[10%] shadow-xl flex items-center justify-center">
+      <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-center tracking-wide whitespace-nowrap">
         Expense Tracker & Splitter
       </h1>
     </nav>
